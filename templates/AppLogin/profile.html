@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container p-5" style="margin-top: 50px">
+
+        <h3>User Profile</h3><hr>
+        <p>User Name: {{user.username}}</p>
+        <p>Name: {{user.first_name}} {{user.last_name}}</p>
+        <p>Email: {{user.email}}</p>
+        <br>
+        <a class="btn btn-warning" type="button" href="{% url 'AppLogin:change_profile'%}">Change Profile</a>
+    </div>
+
+{% endblock %}
