@@ -1,6 +1,6 @@
 from django.urls import path
 
-app_name = 'BloodBank'
+app_name = 'Bloodbank'
 from . import views
 
 urlpatterns = [

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid" style="margin-top:100px">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="m-2">
+                    {%for l in post1 %}
+                        <h4>{{l.title}}</h4>
+                        <hr class="mb-0">
+                        <i>Author: {{l.author}} | Published: {{l.date}}</i>
+                        <div class="text-center">
+                            <img class="card-img-top mt-2 mb-4" src={{l.image.url}} alt="Card image cap" style="width:400px; height:250px">
+                        </div>
+                        <p class="text-justify">{{l.body1|linebreaks}}</p>
+                        <p class="text-justify">{{l.body2|linebreaks}}</p>
+                        <div id="fb-root"></div>
+                        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" 
+                        nonce="g3HlSKST"></script>
+                        <div class="fb-comments"
+                        data-width="" data-numposts="5" data-mobile="true"></div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+            <div class="col-sm-4 mt-4 bg-dark rounded">
+                    <div class="m-3">
+                        <h5 class="bg-light mb-2 p-1 text-center" style="border-radius: 5px;">সাম্প্রতিক পোস্টসমূহ</h5>
+                        {% for l in post %}
+                            <div class="mx-2 my-1" style="width: 16rem;">
+                                    <p class="mb-2"><a class="page-link" href="{%url 'Blog:blog1' l.pk %}" style="text-decoration: none;">{{l.title}}</a></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+            </div>
+        </div>
+        
+    </div>
+    <hr>
+    <div class="m-2">
+        <h5 class="bg-light p-2 mb-2 text-center" style="border-radius: 5px;">অন্যান্য পোস্টসমূহ</h5>
+        <form action="" class="form-inline d-flex justify-content-center">
+
+            {% for l in post2 %}
+            <div class="card mx-1 my-1" style="width: 12rem;">
+                <div class="text-center" style="height: 10rem;">
+                    <img class="card-img-top" src={{l.image.url}} alt="Card image cap" style="height: 100%;">
+                </div>
+                <div class="card-header">
+                    <h6 class="card-title mb-0"><a href="{%url 'Blog:blog1' l.pk %}">{{l.title}}</a></h6>
+                </div>
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+
+{% endblock %}

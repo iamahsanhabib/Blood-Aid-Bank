@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="px-2 py-5" style="margin-top:50px">
+    <div class="mx-2">
+        <a class="btn btn-primary" href="{% url 'Blog:create_post'%}">Create Post</a>
+    
+        {% for list in post %}
+            <hr class="mb-0">
+            <i style="font-size:14px">Author: {{list.author}} | Publish: {{list.date}}</i>
+            <div class="row">
+                <div class="col-sm-12 col-lg-8">
+                    <a class="page-link p-0" href="{% url 'Blog:blog1' list.pk %}" style="font-size:18px; margin-top:5px; border: none">{{list.title}}</a>
+                </div>
+                <div class="col-sm-12 col-lg-4">
+                    <a class="btn btn-sm btn-primary" type="button" href="{% url 'Blog:edit_blog' list.pk %}">Edit</a>
+                    <a class="btn btn-sm btn-danger" type="button" href="{% url 'Blog:delete_blog' list.pk %}">Delete</a>
+                </div>
+            </div>
+            
+            
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

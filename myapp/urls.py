@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('Bloodbank.urls')),
     path('account/', include('AppLogin.urls')),
     path('statement/', include('Statement.urls')),
+    path('blog/', include('Blog.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,

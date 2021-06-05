@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'AppLogin',
     'Statement',
     'Bloodbank',
+    'Blog',
     'crispy_forms',
 ]
 
