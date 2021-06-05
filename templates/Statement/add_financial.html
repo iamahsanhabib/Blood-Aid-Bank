@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    <div class="container p-5 my-5" style="margin-top:50px">
+        <form class="p-3 bg-light" action="" method="post" style="border-radius: 10px;">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                        {{form.name|as_crispy_field}}
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    {{form.des|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                        {{form.category|as_crispy_field}}
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                        {{form.amount|as_crispy_field}}
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                        {{form.month|as_crispy_field}}
+                </div>
+            </div>
+            <br>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

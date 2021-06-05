@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    <div class="py-5 px-2" style="margin-top:50px">
+        <div>
+            <a class="btn btn-primary font-weight-bold" type="button" href="{% url 'Statement:add_tax'%}">CREATE</a>
+            <hr>
+            <p class="text-center font-weight-bold">চলতি মাসে মোট আয়: {{amount.amount__sum}} &#2547;</p>
+            <hr>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="bg-info text-center">
+                  <tr>
+                    <th scope="col">তারিখ</th>
+                    <th scope="col">নাম</th>
+                    <th scope="col">বিবরণী</th>
+                    <th scope="col">পরিমাণ</th>
+                    <th scope="col">মাস</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for l in tax %}
+                    <tr>
+                      <td class="text-center">{{l.date}}</td>
+                      <td>{{l.name}}</td>
+                      <td>{{l.category}}</td>
+                      <td class="text-center">{{l.amount}}</td>
+                      <td>{{l.month}}</td>
+                        <td class="text-center">
+                          <a class="btn btn-sm btn-danger" href="{% url 'Statement:delete_tax' l.id %}">Delete</a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+
+{% endblock %}

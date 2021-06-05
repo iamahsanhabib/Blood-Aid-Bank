@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    <div class="container p-5" style="margin-top: 50px">
+        {% if changed %}
+            <div class="alert alert-success text-center">
+                Tax added successfully!
+            </div>
+        {% endif %}
+        <form class="p-3 bg-light" action="" method="post" style="border-radius: 10px;">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                        {{form.name|as_crispy_field}}
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    {{form.category|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                        {{form.amount|as_crispy_field}}
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    {{form.month|as_crispy_field}}
+                </div>
+            </div>
+            <br>
+            <div class="text-center inline-block">
+                <button class="btn btn-success" type="submit">Save</button>
+                <a class="btn btn-warning"href="{% url 'Statement:show_tax'%}">Back to Home</a>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}

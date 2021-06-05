@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid mt-5 p-5" style="margin-top: 50px">
+            <div class="col-sm-6 px-3 my-3">
+                <a class="btn btn-sm btn-primary" href="{% url 'Statement:add_blood_donation'%}">Add Daily Blood Donation</a>
+                <hr>
+                <div class="alert alert-success text-center">
+                        Total: {% if total is None %} 0 {% endif %} {{ total.bag}}
+                </div>
+                <form class="bg-light p-3" action="" method="post">
+                    {% csrf_token %}
+                    {{form2|crispy}}
+                    <div class="text-center">
+                        <button class="btn btn-success" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        
+</div>
+{% endblock %}

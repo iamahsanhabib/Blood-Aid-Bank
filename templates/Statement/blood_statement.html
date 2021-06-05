@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<div class="px-2 py-5" style="margin-top: 50px">
+    <div>
+        <a class="btn btn-primary font-weight-bold" type="button" href="{% url 'Statement:add_bloodstatement' %}">CREATE</a>
+        <hr>
+    </div>
+    <div class="table-responsive mt-0">
+        <table class="table table-bordered">
+            <thead class="bg-info text-center">
+              <tr>
+                <th scope="col">তারিখ</th>
+                <th scope="col">রক্তদাতা</th>
+                <th scope="col">মোবাইল</th>
+                <th scope="col">গ্রুপ</th>
+                <th scope="col">রোগী</th>
+                <th scope="col">সমস্যা</th>
+                <th scope="col">মোবাইল</th>
+                <th scope="col">স্থান</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for l in blood_donation %}
+                  <tr>
+                    <td>{{l.date}}</td>
+                    <td>{{l.name1}}</td>
+                    <td>{{l.phone1}}</td>
+                    <td class="text-center">{{l.blood_group}}</td>
+                    <td>{{l.name2}}</td>
+                    <td>{{l.problem}}</td>
+                    <td>{{l.phone2}}</td>
+                    <td>{{l.location}}</td>
+                    <td class="text-center">
+                      <a class="btn btn-sm btn-danger" href="{% url 'Statement:delete_bloodstatement' l.id %}">Delete</a>
+                  </td>
+                    
+                  </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+    
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    <div class="px-2 py-5 " style="margin-top:50px">
+        <div>
+            <a class="btn btn-primary font-weight-bold" type="button" href="{% url 'Statement:add_financial'%}">CREATE</a>
+            <hr>
+            <table class="table table-bordered text-center" style="width:380px; border-radius: 5px;">
+                <thead class="bg-info">
+                  <tr>
+                      <th>মোট জমা</th>
+                      <th>মোট খরচ</th>
+                      <th>বর্তমান</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{y}} &#2547;</td>
+                    <td>{{x}} &#2547;</td>
+                    <td>{{amount3}} &#2547;</td>
+                  </tr>
+                </tbody>
+            </table>
+            <hr>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="bg-info text-center">
+                  <tr>
+                    <th scope="col">তারিখ</th>
+                    <th scope="col">নাম</th>
+                    <th scope="col">বিবরণী</th>
+                    <th scope="col">ক্যাটেগরি</th>
+                    <th scope="col">পরিমাণ</th>
+                    <th scope="col">মাস</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for l in financial %}
+                    <tr>
+                      <td class="text-center">{{l.date}}</td>
+                      <td>{{l.name}}</td>
+                      <td>{{l.des}}</td>
+                      <td>{{l.category}}</td>
+                      <td class="text-center">{{l.amount}}</td>
+                      <td>{{l.month}}</td>
+                        <td class="text-center">
+                          <a class="btn btn-sm btn-danger" href="{% url 'Statement:delete_financial' l.id %}">Delete</a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+
+{% endblock %}
