@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="container-fluid pt-5" style="margin-top:50px">
+  <div class="col-sm">
+    <!--form action="/donor/search/" class="mr-5 form-inline" method="POST">
+        {% csrf_token %}
+        <div class="input-group mb-3 ml-1">
+            <div class="input-group-append">
+                <label class="input-group-text" for="inputGroupSelect02">রক্তের গ্রুপ</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect02" name="blood_group">
+              <option selected>Choose...</option>
+              <option value="1">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              
+            </select>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-danger mb-3 ml-1 inline ">খুঁজুন</button>
+        </div>
+        
+    </!--form-->
+    <form action="" class="form-inline" method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-danger ml-2">Search</button>
+    </form>
+  </div>
+    <div class="table-responsive mt-0">
+        <table class="table table-bordered">
+            <thead class="bg-info text-center">
+              <tr>
+                <th>নাম</th>
+                <th>গ্রুপ</th>
+                <th>রক্তদান</th>
+                <th>উপজেলা</th>
+                <th>জেলা</th>
+                {% if user.is_authenticated %}
+                <th>Action</th>
+                {% endif%}
+              </tr>
+            </thead>
+            <tbody>
+              {% if check %}
+                  <div class="alert alert-info text-center">
+                          আপনার কাঙ্ক্ষিত রক্তের গ্রুপ পাওয়া যায় নি।
+                  </div>
+              {% endif %}
+              {% for l in donor%}
+                <tr>
+                  <td>{{l.name}}</td>
+                  <td class="text-center">{{l.blood_group}}</td>
+                  <td class="text-center">{{l.date}}</td>
+                  <td>{{l.location}}</td>
+                  <td>{{l.zilla}}</td>
+                  {% if user.is_authenticated %}
+                  <td class="text-center">
+                    <a class="btn btn-sm btn-info" type="button" href="{% url 'Bloodbank:details_donor' l.pk%}">Details</a>
+                  </td>
+                  {% endif%}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+
+{% endblock %}

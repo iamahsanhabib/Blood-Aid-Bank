@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="container py-5 px-2" style="margin-top:30px; ">
+    <form class="p-5 bg-light" action="" method="post" enctype="multipart/form-data" style="border-radius: 10px;">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-12 col-lg-6">
+                {{ form.name|as_crispy_field }}
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                {{ form.phone|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-lg-6">
+                {{ form.institution|as_crispy_field }}
+            </div>
+            <div class="col-sm-3 col-lg-3">
+                {{ form.designation|as_crispy_field }}
+            </div>
+            <div class="col-sm-3 col-lg-3">
+                {{ form.blood_group|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-lg-6">
+                {{ form.location|as_crispy_field }}
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                {{ form.zilla|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-lg-3">
+                {{ form.id_no|as_crispy_field }}
+            </div>
+            <div class="col-sm-12 col-lg-3">
+                {{ form.gender|as_crispy_field }}
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                {{ form.image|as_crispy_field }}
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <button class="btn btn btn-primary" type="submit">Save</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

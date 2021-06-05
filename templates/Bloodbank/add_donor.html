@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid " style="margin-top:100px">
+      <div class="alert alert-info member-heading" role="alert">
+        আপনি যদি একজন রক্তদাতা হয়ে থাকেন বা হতে ইচ্ছুক হয়ে থাকেন। তবে ব্লাড এইড ব্যাংক আপনার জন্য। নিচের ফর্ম সঠিকভাবে
+        পূরণ করে আমাদের সাথেই থাকুন ও রক্তের প্রয়োজনে রক্ত দিয়ে অন্যের মুখে হাসি ফোঁটাতে পারেন।
+      </div>
+      {% if changed %}
+          <div class="alert alert-success member-heading text-center" role="alert">
+              আপনার তথ্য সঠিকভাবে গৃহীত হয়েছে। ধন্যবাদ!
+          </div>
+      {%endif%}
+      <div class="member">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form|crispy}}
+            <br>
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+            
+        </form>
+        </div>
+    </div>
+{% endblock %}

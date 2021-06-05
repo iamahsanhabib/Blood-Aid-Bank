@@ -37,18 +37,22 @@ def edit_blog(request, pk):
         form = PostForm(request.POST, request.FILES, instance=blog)
         if form.is_valid():
             form.save()
-            return redirect('/post/list/')
+            return HttpResponseRedirect(reverse('Blog:show_blog_list'))
     return render(request, 'Blog/create_blog.html', context={'form': form})
+
+@login_required
 def delete_blog(request, pk):
     blog = Post.objects.get(pk=pk)
     if request.method == 'POST':
         blog.delete()
-        return redirect('/post/list/')
+        return HttpResponseRedirect(reverse('Blog:show_blog_list'))
     return render(request, 'Blog/delete_blog.html')
+
 @login_required
 def showBlogList(request):
     post = Post.objects.order_by('-id').all()
     return render(request, 'Blog/blog_list.html', context={'post':post})
+
 @login_required
 def create_post(request):
     form = PostForm()
@@ -59,6 +63,6 @@ def create_post(request):
             blog_obj.author = request.user
             title = blog_obj.title
             blog_obj.save()
-            return redirect('/post/list/')
+            return HttpResponseRedirect(reverse('Blog:show_blog_list'))
     return render(request, 'Blog/create_blog.html', context={'form':form})
 

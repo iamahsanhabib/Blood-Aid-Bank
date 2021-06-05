@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="container pt-5" style="margin-top:50px">
+    <div class="text-center alert alert-info font-weight-bold">
+        রক্তদাতার তথ্য
+    </div>
+    <hr>
+    <div class="container px-5 py-3 bg-light" style="border: 2px solid tomato; border-radius: 5px;">
+        <p><a style="font-weight: bold;">Name: </a> {{donor.name}}</p>
+        <p><a style="font-weight: bold;">Phone: </a> {{donor.phone}}</p>
+        <p><a style="font-weight: bold;">Institution:</a>  {{donor.institution}}</p>
+        <p><a style="font-weight: bold;">Blood Group:</a>  {{donor.blood_group}}</p>
+        <p><a style="font-weight: bold;">Blood Donation Date:</a>  {{donor.date}}</p>
+        <p><a style="font-weight: bold;">Number of Donation:</a>  {{donor.number_donation}} times</p>
+        <p><a style="font-weight: bold;">Upzilla:</a>  {{donor.location}}</p>
+        <p><a style="font-weight: bold;">Zilla: </a> {{donor.zilla}}</p>
+        <br>
+        <div class="text-center inline-block">
+            <a type="button" class="btn btn-info" href="{% url 'Bloodbank:update_donor' donor.pk%}">Update</a>
+            <a type="button" class="btn btn-danger" href="{% url 'Bloodbank:delete_donor' donor.pk%}">Delete</a>
+            <a type="button" class="btn btn-warning" href="{% url 'Bloodbank:show_donor'%}">Back</a>
+        </div>
+
+    </div>
+
+{% endblock %}

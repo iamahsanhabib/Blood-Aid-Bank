@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container-fluid" style="margin-top:100px">
+        <div class="container px-5 py-3 bg-light" style="border: 2px solid tomato; border-radius: 5px;">
+            
+            <div class="text-center">
+                <img src="{{member.image.url}}" style="width:180px; height:180px; border-radius: 50%">
+            </div>
+            <hr>
+            <p><a style="font-weight: bold;">ID No:</a> {{member.id_no}}</p>
+            <p><a style="font-weight: bold;">Name:</a> {{member.name}}</p>
+            {% if member.gender == 'Male' or user.is_authenticated %}
+            <p><a style="font-weight: bold;">Phone:</a> {{member.phone}}</p>
+            {% endif %}
+            <p><a style="font-weight: bold;">Gender:</a> {{member.gender}}</p>
+            <p><a style="font-weight: bold;">Institution:</a> {{member.institution}}</p>
+            <p><a style="font-weight: bold;">Blood Group:</a> {{member.blood_group}}</p>
+            <p><a style="font-weight: bold;">Upazilla:</a> {{member.location}}</p>
+            <p><a style="font-weight: bold;">Zilla:</a> {{member.zilla}}</p>
+            <br>
+            <div class="text-center inline-block">
+                <a type="button" class="btn btn-warning" href="{% url 'Bloodbank:member'%}">Back</a>
+                <a type="button" class="btn btn-danger" href="{% url 'Bloodbank:update_member_profile' member.pk %}">Update</a>
+            </div>
+    
+        </div>
+    </div>
+
+{% endblock %}
