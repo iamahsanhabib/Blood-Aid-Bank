@@ -84,6 +84,12 @@ class OrganizationMember(models.Model):
         return self.name
     class Meta:
         verbose_name_plural = "Member"
+class Month(models.Model):
+    month = models.CharField(max_length =20, blank=False, null=False, verbose_name="মাস")
+    def __str__(self):
+        return self.month
+    class Meta:
+        verbose_name_plural = "Month"
 
 class Booking(models.Model):
     STATEMENT =(
@@ -100,7 +106,7 @@ class Booking(models.Model):
     phone = models.CharField(max_length = 14, verbose_name = 'মোবাইল নাম্বার')
     problem = models.CharField(max_length = 100, verbose_name = 'রোগীর সমস্যা')
     blood_group = models.ForeignKey(BloodGroup, on_delete=models.CASCADE, verbose_name = 'রক্তের গ্রুপ', null=False)
-    month = models.CharField(max_length = 100,verbose_name = 'মাস',)
+    month = models.ForeignKey(Month, on_delete=models.CASCADE, verbose_name = 'মাস',)
     week = models.CharField(max_length = 100, verbose_name = 'সপ্তাহ', choices=WEEK)
     location = models.ForeignKey(Upazila, on_delete=models.CASCADE, verbose_name="উপজেলা/থানা", null=False)
     zilla = models.ForeignKey(Zilla, on_delete=models.CASCADE, verbose_name="জেলা", null=False)

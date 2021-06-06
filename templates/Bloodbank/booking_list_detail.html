@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="container-fluid pt-5" style="margin-top:50px">
+    {% if changed %}
+        <div class="container">
+            <div class="alert alert-success px-3 text-center" style="margin:10px">
+                তথ্য সঠিকভাবে পরিবর্তিত হয়েছে!
+            </div>
+        </div>
+    {% endif %}
+    <div class="container bg-light p-3" style="border-radius: 5px; border: 1px solid tomato">
+        <h4 class="text-center">
+            {{booking.name}}'s Blood Booking Details
+        </h4>
+        <hr>
+        <div class="row px-5">
+            <div class="col-sm-12 col-lg-8">
+                <p>Name:<a style="margin-left:120px"></a> {{booking.name}}</p>
+                {% if user.is_authenticated %}
+                <p>Phone: <a style="margin-left:115px"></a>{{booking.phone}}</p>
+                {%endif%}
+                <p>Problem: <a style="margin-left:100px"></a>{{booking.problem}}</p>
+                <p>Blood Group: <a style="margin-left:70px"></a>{{booking.blood_group}}</p>
+                <p>Month: <a style="margin-left:110px"></a>{{booking.month}}</p>
+                <p>Week: <a style="margin-left:120px"></a>{{booking.week}}</p>
+                <p>Status: <a style="margin-left:115px"></a>{{booking.statement}}</p>
+                <p>Upazila: <a style="margin-left:110px"></a>{{booking.location}}</p>
+                <p>Zilla: <a style="margin-left:130px"></a>{{booking.zilla}}</p>
+            </div>
+            <div class="col-sm-12 col-lg-4">
+                {% if user.is_authenticated %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <br>
+                    <div class="text-center inline-block">
+                        <button type='submit' class="btn btn-danger">Save</button>
+                        <a class="btn btn-warning"href="{% url 'Bloodbank:show_booking_list'%}">Back</a>
+                    </div>
+                </form>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

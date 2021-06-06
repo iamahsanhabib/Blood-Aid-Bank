@@ -34,7 +34,7 @@ class DonorForm(ModelForm):
 class BookingForm(ModelForm):
     class Meta:
         model = Booking
-        fields = ['statement']
+        fields = '__all__'
         widgets = {
             'statement':Select(attrs={'class': 'form-control mt-1 mb-2 border-warning'}),
         }

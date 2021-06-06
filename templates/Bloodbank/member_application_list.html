@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid" style="margin-top:100px">
+        {% for l in list %}
+            <hr class="px-5">
+            <div class="row px-5">
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-sm-8">
+                                <h6>{{l.name}}</h6>
+                        </div>
+                        <div class="col-sm-4">
+                                <h6>{{l.location}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                        <a class="btn btn-sm btn-info" type="button" href="{% url 'Bloodbank:show_application_details' l.pk%}">View</a>
+                </div>
+            </div>
+        {%endfor%}
+        <hr>
+    </div>
+{% endblock %}

@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader
-from Bloodbank.forms import DonorForm, BloodGroupForm, OrganizationMemberForm
-from Bloodbank.models import Donor, OrganizationMember
+from Bloodbank.forms import DonorForm, BloodGroupForm, OrganizationMemberForm, ApplicantForm, BookingForm
+from Bloodbank.models import Donor, OrganizationMember, Applicant, Booking, About
+from Statement.models import DailyDonation, TotalDonation, DonationPhoto
 import datetime, random
 from django.db.models import Q, Sum
 from django.contrib.auth.decorators import login_required
@@ -11,7 +12,17 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    daily = DailyDonation.objects.all().last()
+    total = TotalDonation.objects.all().last()
+    photo = DonationPhoto.objects.all().last()
+    donation = Donor.objects.order_by('-number_donation')[0:5]
+    context ={
+        'daily':daily,
+        'total':total,
+        'donation':donation,
+        'photo':photo
+    }
+    return render(request, 'index.html', context=context)
 
 def addDonor(request):
     form = DonorForm()
@@ -128,5 +139,88 @@ def update_member_profile(request,pk):
             return redirect('/Member/')
     return render(request, 'Bloodbank/update_member_profile.html', context={'form': form})
     
+def addMember(request):
+    form = ApplicantForm()
+    changed = False
+    if request.method == 'POST':
+        form = ApplicantForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            changed = True
+            #return render(request, 'bloodaidbank/form.html')
+    diction={
+        'form': form,
+        'changed': changed,
+    }
+    return render(request, 'Bloodbank/add_member.html', context=diction)
+
+@login_required
+def show_application_list(request):
+    list = Applicant.objects.order_by('-id').all()
+    #print(list)
+    return render(request, 'Bloodbank/member_application_list.html', context={'list': list})
+@login_required
+def show_application_details(request,pk):
+    list = Applicant.objects.get(pk=pk)
+    return render(request, 'Bloodbank/member_application_details.html', context={'list':list})
+
+@login_required
+def delete_application_list(request,pk):
+    application = Applicant.objects.get(pk=pk)
+    print(application)
+    if request.method == 'POST':
+        application.delete()
+        return redirect('/Application/List/')
+    return render(request, 'Bloodbank/application_list_delete.html')
 
 
+def bookBlood(request):
+    changed = False
+    form = BookingForm()
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            changed = True
+        
+    diction = {
+        'changed':changed,
+        'form':form,
+    }
+    return render(request, 'Bloodbank/booking.html', context=diction)
+
+def show_booking_list(request):
+    booking = Booking.objects.order_by('-month').all()
+    return render(request, 'Bloodbank/booking_list.html', context={'booking':booking})
+
+def show_booking_details(request, pk):
+    booking = Booking.objects.get(id=pk)
+    form  = BookingForm(instance=booking)
+    changed = False
+    if request.method == 'POST':
+        form = BookingForm(request.POST, instance=booking)
+        if form.is_valid():
+            form.save()
+            changed = True
+    context={
+        'booking':booking,
+        'form':form,
+        'changed':changed,
+    }
+    return render(request, 'Bloodbank/booking_list_detail.html', context=context)
+
+@login_required
+def delete_booking(request,pk):
+    booking = Booking.objects.get(pk=pk)
+    if request.method == 'POST':
+        booking.delete()
+        return redirect('/Blood_Booking/list')
+    return render(request, 'Bloodbank/delete_booking_list.html')
+
+def showAbout(request):
+
+    about = About.objects.all().last()
+    diction = {
+        'about':about,
+    }
+    return render(request, 'Bloodbank/about.html', context=diction)

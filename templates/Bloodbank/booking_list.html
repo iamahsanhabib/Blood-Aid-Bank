@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="container-fluid pt-5" style="margin-top:50px">
+    <div class="table-responsive mt-0">
+        <table class="table table-bordered">
+            <thead class="bg-info text-center">
+              <tr>
+                <th style="width:350px">রোগীর নাম</th>
+                <th>সমস্যা</th>
+                <th>গ্রুপ</th>
+                <th>মাস</th>
+                <th>সপ্তাহ</th>
+                <th>অবস্থা</th>
+                {% if user.is_authenticated %}
+                <th>Action</th>
+                {%endif%}
+              </tr>
+            </thead>
+            <tbody>
+              {% for l in booking%}
+                <tr>
+                  <td style="width:350px">{{l.name}}</td>
+                  <td>{{l.problem}}</td>
+                  <td class="text-center">{{l.blood_group}}</td>
+                  <td class="text-center">{{l.month}}</td>
+                  <td class="text-center">{{l.week}}</td>
+                  <td class="text-center">
+                    <a class="btn btn-sm btn-info" type="button" href="{% url 'Bloodbank:show_booking_details' l.pk%}">Details</a>
+                  </td>
+                  {% if user.is_authenticated %}
+                  <td class="text-center">
+                    <a class="btn btn-sm btn-danger" type="button" href="{% url 'Bloodbank:delete_booking' l.pk%}">Delete</a>
+                  </td>
+                  {%endif %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+
+{% endblock %}

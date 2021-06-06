@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Blood Aid Bank, Jashore</title>
 </head>
 
@@ -18,8 +19,8 @@
 <body>
     <div>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: cadetblue;">
-            <a class="navbar-brand" href="{% url 'Bloodbank:index'%}" >Home
-                <!--img src="#" alt="Logo" style="width: 40px; height:40px; border-radius:50%"-->
+            <a class="navbar-brand" href="{% url 'Bloodbank:index' %}" >
+                <img src="{% static 'images/logo/logo.jpg' %}" alt="Logo" style="width: 40px; height:40px; border-radius:50%">
             </a>
             <p class="text-left mr-auto mt-2 h6" style="font-family: Lucida Sans;">BLOOD AID BANK, JASHORE</p>
             
@@ -28,15 +29,74 @@
             </button>
         
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                
+            <ul class="navbar-nav ml-auto" id="myDIV">
+                <li class="nav-item">
+                    <a class="nav-link text-center" href="{% url 'Bloodbank:addMember' %}">সদস্য-আবেদন</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link text-center" href="{% url 'Bloodbank:show_donor' %}" >রক্তদাতা</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link text-center" href="{% url 'Bloodbank:show_booking_list'%}">রক্তের-আবেদন</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-center" href="{% url 'Blog:blog' %}">ব্লগ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-center" href="{% url 'Bloodbank:member' %}">সদস্য</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-center" href="{% url 'Bloodbank:about' %}">যোগাযোগ</a>
+                </li>
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'AppLogin:logout'%}">Logout</a>
-                    </li>
+                <li class="nav-item" style="cursor: pointer;">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle text-center" type="button" data-toggle="dropdown">
+                            ড্যাশবোর্ড
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu pl-2">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{% url 'Statement:show_tax' %}">চাঁদা <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'Statement:show_financial'%}">আর্থিক-বিবরণী</a>
+                            </li>
+                            <div class="dropdown-divider"></div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'Statement:show_bloodstatement'%}">রক্তদাতা-বিবরণী</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'Statement:add_blood_donation'%}">রক্ত-বিবরণী</a>
+                            </li>
+                            <div class="dropdown-divider"></div>
+                            <li class="nav-item">
+                                <a class="nav-link text-center" href="{% url 'Bloodbank:show_application_list'%}">সদস্য-আবেদন</a>
+                            </li>
+                            <div class="dropdown-divider"></div>
+                            <li class="nav-item">
+                                <a class="nav-link text-center" href="{% url 'Blog:show_blog_list'%}">ব্লগ</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item mr-5" style="cursor: pointer;">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle text-center" type="button" data-toggle="dropdown">
+                            {{user.first_name}} {{user.last_name}}
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu pl-2">
+                            <li class="nav-item">
+                                <a class="nav-link text-center" href="{% url 'AppLogin:profile'%}">প্রোফাইল</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'AppLogin:logout' %}">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 {% else %}
                     <li class="nav-item text-left">
-                        <a style="font-weight: bold;" class="nav-link btn btn-sm " href="{% url 'AppLogin:login' %}">Login</a>
+                        <a style="font-weight: bold;" class="nav-link btn btn-sm " href="{% url 'AppLogin:login' %}"><i class="fa fa-fw fa-user"></i>Login</a>
                     </li>
                 {% endif%}
                 
@@ -45,6 +105,7 @@
             </div>
         </nav>
     </div>
+    
     {% block content %}
     {% endblock %}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

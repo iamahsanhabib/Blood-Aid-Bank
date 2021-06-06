@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid" style="margin-top:100px">
+    <div class="mt-5 row">
+        <div class="col-sm-8">
+            <div class="text-justify m-2 p-1">
+                
+                    <p>{{about.description1|safe}}</p>
+                    <p class="m-1">{{about.description2|safe}}</p>
+                    <p>{{about.description3|safe}}</p>
+                
+            </div>
+            <div>
+                <hr>
+                <div class="row">
+        
+                    <div class="col-sm-8">
+                        <blockquote>
+                            <p class="mb-5"></p>
+                            <q class="text-muted small ml-3 mt-5 p-3">
+                                দেহের শক্তি দ্বারা সারা জীবন চেষ্টা করলে আপনি কখনো রক্ত দান করতে পারবেন না
+                                । কিন্তু মনের শক্তি দ্বারা চেষ্টা করলে আপনি প্রতি ৪ মাস পর-পর রক্ত দান করতে সক্ষম।
+                            </q>
+                        </blockquote>
+                    </div>
+                    <div class="col-sm-4 mt-1 text-center">
+                        
+                        <img src="{{about.chairman_img.url}}" alt="" style="width:150px; height:150px; border: 2px solid rgb(190, 42, 42); border-radius: 50%;">
+                        
+                        <h5 class="mb-0 mt-2">নাহিদ হাসান সৈকত</h5>
+                        <h3 class="small text-muted">প্রতিষ্ঠাতা, ব্লাড এইড ব্যাংক, যশোর</h3>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-sm-4 mt-4 bg-dark rounded">
+            <h5 class="bg-light p-1 m-2 rounded text-center">প্রয়োজনে যোগাযোগ করুন</h5>
+            <div class="ml-5">
+                <a class="page-link border-0 mb-0 bg-dark" href="tel:+8801785548302">নাহিদ হাসান সৈকতঃ 01785548302</a>
+                <a class="page-link border-0 mb-0 bg-dark" href="tel:+8801795069210">আহসান হাবীবঃ 01795069210</a>
+                <a class="page-link border-0 bg-dark" href="tel:+8801913542595">আশরাফুল ইসলামঃ 01913542595</a>
+            </div>
+            <div class="container-fluid">
+                <hr>
+                    <div class="d-flex justify-content-center">
+                        <a  class=" page-link  mb-2 text-center text-dark bg-info" href="{% url 'Bloodbank:addDonor' %}" style="width: 200px;">রক্তদাতা নিবন্ধন করুন</a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a  class="page-link mb-2 text-center text-dark bg-info" href="{% url 'Bloodbank:addMember' %}" style="width: 200px;">সদস্য আবেদন করুন</a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a  class="page-link mb-2 text-center text-dark bg-info" href="{% url 'Bloodbank:booking' %}" style="width: 200px;">রক্তের জন্য আবেদন   </a>
+                    </div>
+                <hr>
+            </div>
+            <div class="media-button text-center mt-3">
+                <button class="btn" onclick="window.open('https://www.facebook.com/BloodAidBank')"><i class="fab fa-facebook-f" area-hidden="true"></i></button>
+                <button class="btn" onclick="window.open('https://www.facebook.com/groups/bloodaidbankjashore')"><i class="fab fa-linkedin-in" area-hidden="true"></i></button>
+            </div>
+
+        </div>
+    </div>
+    <div class="container-fluid mb-3">
+        <hr>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                    <div class=" rounded bg-light p-3">
+                        <form class="" action="" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="name">নাম</label>
+                                <input type="text" class="form-control" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">ইমেইল</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">মন্তব্য</label>
+                                <textarea class="form-control" name="comment" id="#" rows="7" placeholder="আমাদের সম্পর্কে আপনার অনূভুতি" required></textarea>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-success">Send</button>
+                            </div>
+                            
+                        </form>
+                    </div>
+                
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

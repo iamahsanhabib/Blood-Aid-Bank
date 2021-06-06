@@ -1,7 +1,147 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+<div class="container-fluid mt-5">
+    <div class="row" style="background-color:aquamarine;">
+      <div class="col-sm mt-5">
+        <form action="/donor/search/" class="ml-5 mr-5" method="POST">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <label class="input-group-text" for="inputGroupSelect02">রক্তের গ্রুপ</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect02" name="blood_group">
+                  <option selected>Choose...</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                  
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-danger mb-3 ">খুঁজুন</button>
+        </form>
+      </div>
+      
+      <div class="col-sm mt-5">
+            <div class="row">
+                <div class="col-sm d-flex justify-content-center">
+                    <div class="text-center">
+                        <div class="card bg-light mb-3" style="width: 18rem;">
+                            <h5 class="card-header">
+                                {% if total is None %} 0 {% endif %} {{ total.bag}} ব্যাগ</h5>
+                            <div class="card-body">
+                              <p class="card-text">এ পর্যন্ত রক্ত পেতে সাহায্য করেছি</p>
+                            </div>
+                          </div>
+                    </div>
+                                              
+                </div>
+                <div class="col-sm d-flex justify-content-center">
+                    <div class="text-center">
+                        <div class="card bg-light mb-3" style="width: 18rem;">
+                            <h5 class="card-header">
+                                {% if daily is None %} 0 {% endif %} {{ daily.bag}} ব্যাগ</h5>
+                            <div class="card-body">
+                            <p class="card-text">গত কাল রক্ত পেতে সাহায্য করেছি</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+  
+<div class="container-fluid">
+    <div class="row my-5">
+        <div class="col-sm text-center">
+            <a type="button" class="btn btn-danger p-3 rounded-pill my-2" href="{% url 'Bloodbank:addDonor' %}" style="width: 200px;">রক্তদাতা নিবন্ধন করুন</a>
+        </div>
+        <div class="col-sm text-center">
+            <a type="button" class="btn btn-danger p-3 rounded-pill my-2" href="{% url 'Bloodbank:addMember' %}" style="width: 200px;">সদস্য আবেদন করুন</a>
+        </div>
+        <div class="col-sm text-center">
+            <a type="button" class="btn btn-danger p-3 rounded-pill my-2" href="{% url 'Bloodbank:booking' %}" style="width: 200px;">রক্তের জন্য আবেদন   </a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-warning">
+    <div class="row">
+        <div class="col-sm-12 col-lg-6 p-3">
+            <div class="alert alert-info text-center">
+                    আমাদের হয়ে এ পর্যন্ত সর্বোচ্চ রক্তদাতা
+            </div class="p-3">
+                {% for l in donation %}
+                    <div>
+                        <a class="page-link" href="">
+                            <div class="row inline-block">
+                                <div class="d-inline col-sm-6 ">{{ l.name}} </div>
+                                <div class="d-inline col-sm-3">{{ l.blood_group}}</div>
+                                <div class="d-inline col-sm-3">{{ l.number_donation}}</div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor%}
+        </div>
+        <div class="col-sm-12 col-lg-6 p-3">
+            <div class="alert alert-info text-center">
+                সাহায্যের হাত বাড়িয়ে দিতে পারেন আপনিও!
+            </div class="p-5">
+                <img class="rounded mx-auto d-block" src={{photo.image.url}} alt="" style="width:100%; height:250px">
+            </div>
 
-    Hello World
+    </div>
+</div>
+<hr>
+<div class="container-fluid">
+    <div class="row mb-3 mt-5">
+        <div class="col-sm-6 text-center">
+            <div class="">
+                <img src="{% static 'images/backgroundimages/calender.jpg'%}" alt="" style="width:100%; border-radius:10px">
+            </div>
+            
+        </div>
+        <div class="col-sm-6 justify-content-center">
+            <h4 class="mt-3">ব্লাড এইড ব্যাংক যশোর ক্যালেন্ডার, ২০২১</h4>
+            <hr style="border: 1px; border-style: dashed; margin: 0px 5px;">
+            <p class="mt-4">২০২১ সালের ক্যালেন্ডার PDF ফরমেটে। প্রিন্ট করে বাড়িতে,
+             অফিসে, প্রতিষ্ঠানে লাগিয়ে দিন।</p>
+              <p class="mt-3">মন চাইলে কাউকে উপহার দিন!
+              রক্তদানের আহ্বান ছড়িয়ে দিন।</p>
+
+            <div class="text-center">
+                <a type="button" class="btn btn-primary" href="https://drive.google.com/drive/folders/180FLuvBotJjVHzL0C4I14F7TIsCY_hR2?usp=sharing">Download</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid footer bg-dark">
+    <div>
+        <div class="mt-3">
+            <div class="text-center text-light" style="font-size: 20px; font-weight:bold">
+                Follow Us
+            </div>
+            <div class="media-button text-center mt-3">
+                <button class="btn" onclick="window.open('https://www.facebook.com/BloodAidBank')"><i class="fab fa-facebook-f" area-hidden="true"></i></button>
+                <button class="btn" onclick="window.open('https://www.linkedin.com/')"><i class="fab fa-linkedin-in" area-hidden="true"></i></button>
+                <button class="btn" onclick="window.open('https://www.youtube.com/')"><i class="fab fa-youtube" area-hidden="true"></i></button>
+                <button class="btn" onclick="window.open('https://www.facebook.com/groups/bloodaidbankjashore')"><i class="fab fa-instagram" area-hidden="true"></i></button>
+            </div>
+        </div>
+        <div class="text-center p-3 text-light" style="font-size: 15px;">
+            © 2020 Copyright: Blood Aid Bank, Jashore | All Rights Reserved
+            <h6 >Developed by: <a class="text-light" href="https://www.facebook.com/ahsanhabib.170111/">Ahsan Habib</a> <h6>
+            
+
+        </div>
+    </div>
+</div>
 
 {% endblock %}

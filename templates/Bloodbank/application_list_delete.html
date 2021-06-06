@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="container-fluid pt-5" style="margin-top:50px">
+    
+    <form action="" method="POST">{%csrf_token%}
+        <div class="text-center">
+            <p class="text-center">Sure! Do you want to delete this list?</p>
+            <button type='submit' class="btn btn-danger">Ok. I anm sure!</button>
+            <a type="button" class="btn btn-warning" href="{% url 'Bloodbank:show_application_list'%}">Back</a>
+        </div>
+    </form>
+
+{% endblock %}

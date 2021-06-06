@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid" style="margin-top:100px">
+      <div class="alert alert-info member-heading" role="alert">
+        আপনার যদি থ্যালাসেমিয়া অথবা সিজারের রোগী থাকে, তবে আপনাকে আগে থেকেই ২ জন
+        রক্তদাতা সংগ্রহ করে রাখা উচিত। প্রয়োজনীয় তথ্য দিয়ে আপনি রক্তদাতার জন্য এখানে
+        আবেদন করতে পারেন।
+      </div>
+      {% if changed %}
+          <div class="alert alert-success member-heading text-center" role="alert">
+              আপনার তথ্য সঠিকভাবে গৃহীত হয়েছে। ধন্যবাদ!
+          </div>
+      {%endif%}
+      <div class="member">
+        <form action="#" method="post">
+          {% csrf_token %}
+           {{ form|crispy}}
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">জমা দিন</button>
+            </div>
+          </form>
+        </div>
+    </div>
+{% endblock %}

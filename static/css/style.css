@@ -1,0 +1,9 @@
+.media-button .btn{
+    border: none;
+    border-radius:25px;
+    padding: 5px;
+    margin: 8px;
+    width: 50px;
+    cursor : pointer;
+    font-size: 32px;
+}

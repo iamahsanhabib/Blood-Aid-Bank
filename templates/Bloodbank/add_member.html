@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid" style="margin-top:100px">
+      <div class="alert alert-info member-heading" role="alert">
+        আপনি যদি একজন স্বেচ্ছাসেবী হতে ইচ্ছুক হয়ে থাকেন। তবে ব্লাড এইড ব্যাংক আপনার জন্য। নিচের ফর্ম সঠিকভাবে
+        পূরণ করে আমাদের সাথেই থাকুন।
+      </div>
+      {% if changed %}
+          <div class="alert alert-success member-heading text-center" role="alert">
+              আপনার তথ্য সঠিকভাবে গৃহীত হয়েছে। ধন্যবাদ!
+          </div>
+      {%endif%}
+      <div class="member">
+        <form action="/Registration/" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+                  <div class="row">
+                    {{form.media}}
+                      <div class="col-sm-6 p-2">
+                          {{form.name.label}}
+                          {{form.name}}
+                      </div>
+                      <div class="col-sm-6 p-2">
+                        {{form.phone.label}}
+                        {{form.phone}}
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6 p-2">
+                        {{form.institution.label}}
+                        {{form.institution}}
+                    </div>
+                    <div class="col-sm-6 p-2">
+                      {{form.blood_group.label}}
+                      {{form.blood_group}}
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 p-2">
+                        {{form.location.label}}
+                        {{form.location}}
+                  </div>
+                  <div class="col-sm-6 p-2">
+                    {{form.zilla.label}}
+                    {{form.zilla}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 p-2">
+                      {{form.image.label}}
+                      {{form.image}}
+                  </div>
+                  <div class="col-sm-6 p-2">
+                    {{form.ref_name.label}}
+                    {{form.ref_name}}
+                  </div>
+              </div>
+              
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">জমা দিন</button>
+               </div>
+          </form>
+        </div>
+    </div>
+{% endblock %}
