@@ -11,8 +11,8 @@
               আপনার তথ্য সঠিকভাবে গৃহীত হয়েছে। ধন্যবাদ!
           </div>
       {%endif%}
-      <div class="member">
-        <form action="/Registration/" method="post" enctype="multipart/form-data">
+      <div class="mb-2">
+        <form class="p-3 mx-2" action="/Registration/" method="post" enctype="multipart/form-data" style="border: 2px dashed black; border-radius:5px">
           {% csrf_token %}
                   <div class="row">
                     {{form.media}}

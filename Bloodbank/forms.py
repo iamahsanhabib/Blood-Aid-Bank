@@ -6,6 +6,8 @@ class BloodGroupForm(ModelForm):
     class Meta:
         model = BloodGroup
         fields = '__all__'
+        
+
 
 class ApplicantForm(ModelForm):
     class Meta:
@@ -26,10 +28,6 @@ class DonorForm(ModelForm):
     class Meta:
         model = Donor
         fields = '__all__'
-        widgets = {
-            'date':DateInput(attrs={'class': 'form-control mt-1 mb-2 border-warning'}),
-            'number_donation': NumberInput(attrs={'class': 'form-control mt-1 mb-2 border-warning'}),
-        }
 
 class BookingForm(ModelForm):
     class Meta:

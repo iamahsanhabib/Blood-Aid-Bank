@@ -9,8 +9,8 @@
                         <h4>{{l.title}}</h4>
                         <hr class="mb-0">
                         <i>Author: {{l.author}} | Published: {{l.date}}</i>
-                        <div class="text-center">
-                            <img class="card-img-top mt-2 mb-4" src={{l.image.url}} alt="Card image cap" style="width:400px; height:250px">
+                        <div class="text-center mx-5">
+                            <img class="mt-2 mb-4" src={{l.image.url}} alt="Card image cap" style="width:100%;">
                         </div>
                         <p class="text-justify">{{l.body1|linebreaks}}</p>
                         <p class="text-justify">{{l.body2|linebreaks}}</p>
@@ -43,12 +43,12 @@
         <form action="" class="form-inline d-flex justify-content-center">
 
             {% for l in post2 %}
-            <div class="card mx-1 my-1" style="width: 12rem;">
-                <div class="text-center" style="height: 10rem;">
-                    <img class="card-img-top" src={{l.image.url}} alt="Card image cap" style="height: 100%;">
+            <div class="card mx-1 my-1" style="width: 14rem;">
+                <div class="text-center" style="height: 12rem;">
+                    <img class="card-img-top" src={{l.image.url}} alt="Card image cap" style="height: 100%; width: 100%;">
                 </div>
                 <div class="card-header">
-                    <h6 class="card-title mb-0"><a href="{%url 'Blog:blog1' l.pk %}">{{l.title}}</a></h6>
+                    <h6 class="card-title mb-0" style="font-size: 12px"><a href="{%url 'Blog:blog1' l.pk %}">{{l.title}}</a></h6>
                 </div>
             </div>
             {% endfor %}

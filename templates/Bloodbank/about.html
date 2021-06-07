@@ -62,36 +62,5 @@
 
         </div>
     </div>
-    <div class="container-fluid mb-3">
-        <hr>
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
-                    <div class=" rounded bg-light p-3">
-                        <form class="" action="" method="post">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label for="name">নাম</label>
-                                <input type="text" class="form-control" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">ইমেইল</label>
-                                <input type="email" class="form-control" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="comment">মন্তব্য</label>
-                                <textarea class="form-control" name="comment" id="#" rows="7" placeholder="আমাদের সম্পর্কে আপনার অনূভুতি" required></textarea>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-success">Send</button>
-                            </div>
-                            
-                        </form>
-                    </div>
-                
-            </div>
-            <div class="col-sm-3"></div>
-        </div>
-    </div>
 </div>
 {% endblock %}

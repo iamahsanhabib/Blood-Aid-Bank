@@ -50,14 +50,24 @@ class Designation(models.Model):
         verbose_name_plural = "Designation"
 
 class Donor(models.Model):
+    BLOOD_GROUP_CHOICE = (
+        ('A+', 'A+'),
+        ('B+', 'B+'),
+        ('O+', 'O+'),
+        ('AB+', 'AB+'),
+        ('A-', 'A-'),
+        ('B-', 'B-'),
+        ('O-', 'O-'),
+        ('AB-', 'AB-'),
+    )
     name = models.CharField(max_length = 100, verbose_name = 'রক্তদাতা নাম')
     phone = models.CharField(max_length = 14, verbose_name = 'মোবাইল নাম্বার')
     institution = models.CharField(max_length = 100, verbose_name = 'শিক্ষা-প্রতিষ্ঠান')
-    blood_group = models.ForeignKey(BloodGroup, on_delete=models.CASCADE, verbose_name = 'রক্তের গ্রুপ', null=False)
+    blood_group = models.CharField(max_length = 6,default = 'Select', choices = BLOOD_GROUP_CHOICE, verbose_name = 'রক্তের গ্রুপ', null=False)
     number_donation = models.IntegerField(default=0, verbose_name ="মোট রক্তদান")
     date = models.DateField(auto_now_add=False,verbose_name = 'রক্তদানের-তারিখ', default=datetime.datetime.now)
-    location = models.ForeignKey(Upazila, on_delete=models.CASCADE, verbose_name="উপজেলা/থানা", null=False)
-    zilla = models.ForeignKey(Zilla, on_delete=models.CASCADE, verbose_name="জেলা", null=False)
+    location = models.CharField(max_length = 100, verbose_name = 'উপজেলা')
+    zilla = models.CharField(max_length = 100, verbose_name = 'জেলা')
     REQUIRED_FIELDS = ('name', 'phone','institution', 'blood_group','date','location','zilla')
 
     def __str__(self):
@@ -65,6 +75,7 @@ class Donor(models.Model):
     class Meta:
         ordering = ['blood_group']
         verbose_name_plural = "Donor"
+        
 class OrganizationMember(models.Model):
     GENDER_CHOICE = (
         ('Male', 'Male'),
@@ -110,7 +121,7 @@ class Booking(models.Model):
     week = models.CharField(max_length = 100, verbose_name = 'সপ্তাহ', choices=WEEK)
     location = models.ForeignKey(Upazila, on_delete=models.CASCADE, verbose_name="উপজেলা/থানা", null=False)
     zilla = models.ForeignKey(Zilla, on_delete=models.CASCADE, verbose_name="জেলা", null=False)
-    statement = models.CharField(max_length = 100, verbose_name = 'রক্তের অবস্থা', choices=STATEMENT)
+    statement = models.CharField(max_length = 100, verbose_name = 'রক্তের অবস্থা', choices=STATEMENT, blank = True, null = False)
     REQUIRED_FIELDS = ('name', 'phone','problem', 'blood_group','month','week', 'location','zilla')
 
     def __str__(self):

@@ -25,43 +25,22 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 def addDonor(request):
-    form = DonorForm()
     changed = False
     if request.method == 'POST':
-        form = DonorForm(request.POST)
-        if form.is_valid():
-            form.save()
-            changed = True
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        institution = request.POST.get('institution')
+        blood_group = request.POST.get('blood')
+        date = request.POST.get('date')
+        location = request.POST.get('upozila')
+        zilla = request.POST.get('zilla')
+        mydata = Donor(name=name, phone=phone,institution=institution, blood_group=blood_group, date=date, location=location, zilla=zilla)
+        mydata.save()
+        changed = True
     diction = {
         'changed':changed,
-        'form': form,
     }
     return render(request, 'Bloodbank/add_donor.html', context=diction)
-def showDonor(request):
-    donor = Donor.objects.order_by('blood_group','date').all()
-    form = BloodGroupForm()
-    diction ={
-        'list': donor,
-        'form': form,
-    }
-    return render(request, 'Bloodbank/donor.html', context=diction)
-def searchDonor(request):
-    form = BloodGroupForm()
-    '''if request.method == 'POST':
-        form = BloodGroupForm(request.POST)
-        group = request.POST.get('blood_group')
-        donor = Donor.objects.filter(Q(blood_group=group)).order_by('blood_group','date')
-        if(len(donor)==0):
-            donor = Donor.objects.order_by('blood_group','date').all()
-        diction ={
-            'list': donor,
-            'group': group,
-            'form': form,
-        }'''
-    diction = {
-        'form': form,
-    }
-    return render(request, 'Bloodbank/donor.html', context=diction)
 
 def show_Donor(request):
     donor = Donor.objects.order_by('blood_group','date').all()
@@ -85,6 +64,7 @@ def update_Donor_Details(request,pk):
     return render(request, 'Bloodbank/update_blood_donor.html', context={'form': form})
 
 def search_donor(request):
+    form = BloodGroupForm()
     if request.method == 'POST':
         blood_group = request.POST.get('blood_group')
         donor = Donor.objects.order_by('blood_group','date').filter(blood_group=blood_group)

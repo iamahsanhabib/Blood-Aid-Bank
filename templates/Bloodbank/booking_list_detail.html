@@ -17,23 +17,23 @@
         <hr>
         <div class="row px-5">
             <div class="col-sm-12 col-lg-8">
-                <p>Name:<a style="margin-left:120px"></a> {{booking.name}}</p>
+                <p><a style="font-weight: bold;">Name: </a> {{booking.name}}</p>
                 {% if user.is_authenticated %}
-                <p>Phone: <a style="margin-left:115px"></a>{{booking.phone}}</p>
+                <p><a style="font-weight: bold;">Phone: </a> {{booking.phone}}</p>
                 {%endif%}
-                <p>Problem: <a style="margin-left:100px"></a>{{booking.problem}}</p>
-                <p>Blood Group: <a style="margin-left:70px"></a>{{booking.blood_group}}</p>
-                <p>Month: <a style="margin-left:110px"></a>{{booking.month}}</p>
-                <p>Week: <a style="margin-left:120px"></a>{{booking.week}}</p>
-                <p>Status: <a style="margin-left:115px"></a>{{booking.statement}}</p>
-                <p>Upazila: <a style="margin-left:110px"></a>{{booking.location}}</p>
-                <p>Zilla: <a style="margin-left:130px"></a>{{booking.zilla}}</p>
+                <p><a style="font-weight: bold;">Problem: </a>{{booking.problem}}</p>
+                <p><a style="font-weight: bold;">Blood Group: </a>{{booking.blood_group}}</p>
+                <p><a style="font-weight: bold;">Month: </a>{{booking.month}}</p>
+                <p><a style="font-weight: bold;">Week: </a>{{booking.week}}</p>
+                <p><a style="font-weight: bold;">Status: </a>{{booking.statement}}</p>
+                <p><a style="font-weight: bold;">Upazila: </a>{{booking.location}}</p>
+                <p><a style="font-weight: bold;">Zilla: </a>{{booking.zilla}}</p>
             </div>
             <div class="col-sm-12 col-lg-4">
                 {% if user.is_authenticated %}
                 <form action="" method="POST">
                     {% csrf_token %}
-                    {{form|crispy}}
+                    {{form.statement|as_crispy_field}}
                     <br>
                     <div class="text-center inline-block">
                         <button type='submit' class="btn btn-danger">Save</button>

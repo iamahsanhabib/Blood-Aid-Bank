@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container-fluid pt-5" style="margin-top:50px">
   <div class="col-sm">
-    <!--form action="/donor/search/" class="mr-5 form-inline" method="POST">
+    <form action="/donor/search/" class="mr-5 form-inline" method="POST">
         {% csrf_token %}
         <div class="input-group mb-3 ml-1">
             <div class="input-group-append">
@@ -12,7 +12,7 @@
             </div>
             <select class="custom-select" id="inputGroupSelect02" name="blood_group">
               <option selected>Choose...</option>
-              <option value="1">A+</option>
+              <option value="A+">A+</option>
               <option value="A-">A-</option>
               <option value="B+">B+</option>
               <option value="B-">B-</option>
@@ -27,12 +27,8 @@
           <button type="submit" class="btn btn-danger mb-3 ml-1 inline ">খুঁজুন</button>
         </div>
         
-    </!--form-->
-    <form action="" class="form-inline" method="POST">
-        {% csrf_token %}
-        {{form|crispy}}
-        <button type="submit" class="btn btn-danger ml-2">Search</button>
     </form>
+    
   </div>
     <div class="table-responsive mt-0">
         <table class="table table-bordered">

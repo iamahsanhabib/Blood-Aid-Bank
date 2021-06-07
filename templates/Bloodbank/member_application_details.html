@@ -9,13 +9,13 @@
     <div class="container px-5 py-3 bg-light" style="border: 2px solid tomato; border-radius: 5px;">
         <img class=" mx-auto d-block" src={{list.image.url}} alt="" style="width:150px; height:150px; border-radius: 50%; border: 1px solid orange">
         <hr>
-        <p>Name:<a style="margin-left:120px"></a> {{list.name}}</p>
-        <p>Phone: <a style="margin-left:115px"></a>{{list.phone}}</p>
-        <p>Institution: <a style="margin-left:90px"></a>{{list.institution}}</p>
-        <p>Blood Group: <a style="margin-left:70px"></a>{{list.blood_group}}</p>
-        <p>Upazilla: <a style="margin-left:105px"></a>{{list.location}}</p>
-        <p>Zilla: <a style="margin-left:135px"></a>{{list.zilla}}</p>
-        <p>Reference: <a style="margin-left:90px"></a>{{list.ref_name}}</p>
+        <p><a style="font-weight: bold;">Name: </a> {{list.name}}</p>
+        <p><a style="font-weight: bold;">Phone: </a>{{list.phone}}</p>
+        <p><a style="font-weight: bold;">Institution: </a>{{list.institution}}</p>
+        <p><a style="font-weight: bold;">Blood Group: </a>{{list.blood_group}}</p>
+        <p><a style="font-weight: bold;">Upazilla: </a>{{list.location}}</p>
+        <p><a style="font-weight: bold;">Zilla: </a>{{list.zilla}}</p>
+        <p><a style="font-weight: bold;">Reference: </a>{{list.ref_name}}</p>
         <br>
         <div class="text-center inline-block">
             <a type="button" class="btn btn-danger" href="{% url 'Bloodbank:delete_application_list' list.pk %}">Delete</a>
